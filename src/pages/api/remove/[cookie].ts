@@ -1,4 +1,4 @@
-import { CookieValueTypes, removeCookies } from 'cookies-next';
+import { CookieValueTypes, deleteCookie } from 'cookies-next';
 import { NextApiResponse, NextApiRequest } from 'next';
 
 export default function handler(
@@ -9,6 +9,6 @@ export default function handler(
   if (typeof cookie !== 'string') {
     return res.status(400).end();
   }
-  removeCookies(cookie, { req, res });
+  deleteCookie(cookie, { req, res });
   return res.status(200).end();
 }

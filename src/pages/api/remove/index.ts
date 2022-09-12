@@ -1,4 +1,4 @@
-import { getCookies, removeCookies } from 'cookies-next';
+import { getCookies, deleteCookie } from 'cookies-next';
 import { TmpCookiesObj } from 'cookies-next/lib/types';
 import { NextApiResponse, NextApiRequest } from 'next';
 
@@ -9,7 +9,7 @@ export default function handler(
   const cookies = getCookies({ req, res });
   if (cookies) {
     Object.keys(cookies).forEach((cookie) => {
-      removeCookies(cookie, { req, res });
+      deleteCookie(cookie, { req, res });
     });
   }
   return res.status(200).end();

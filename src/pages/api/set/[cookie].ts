@@ -5,14 +5,13 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ [key: string]: CookieValueTypes }>
 ) {
-  const { cookie } = req.query;
-  if (!Array.isArray(cookie) || cookie.length < 2) {
+  const { cookie, value } = req.query;
+  if (typeof cookie !== 'string') {
     return res.status(400).end();
   }
-  const [key, value] = cookie;
-  if (key === undefined || value === undefined) {
+  if (cookie === undefined || value === undefined) {
     return res.status(400).end();
   }
-  setCookie(key, value, { req, res, maxAge: 60 * 6 * 24 });
+  setCookie(cookie, value, { req, res, maxAge: 60 * 6 * 24 });
   return res.status(200).end();
 }
